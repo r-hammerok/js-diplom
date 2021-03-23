@@ -1,0 +1,3 @@
+/node_modules/
+/robots.txt
+/dist/*.hot-update.*
