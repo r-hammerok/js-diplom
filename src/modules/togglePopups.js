@@ -7,6 +7,7 @@ const togglePopups = () => {
 
         if (target.closest('.fixed-gift')) {
             idPopup = '#gift';
+            target.closest('.fixed-gift').style.display = 'none';
         } else {
             idPopup = target.dataset.popup;
             if (!idPopup) {

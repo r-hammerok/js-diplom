@@ -16,4 +16,4 @@ togglePopups();
 // toggleGift();
 
 // Main slider
-// mainSlider();
+mainSlider();
