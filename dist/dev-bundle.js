@@ -38,7 +38,18 @@ eval("\nmodule.exports = function () {\n\treturn /[\\u001b\\u009b][[()#;?]*(?:[0
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_selectClub__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/selectClub */ \"./src/modules/selectClub.js\");\n/* harmony import */ var _modules_togglePopups__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/togglePopups */ \"./src/modules/togglePopups.js\");\n\n\n\n // Select club\n\n(0,_modules_selectClub__WEBPACK_IMPORTED_MODULE_0__.default)(); // Toggle popups\n\n(0,_modules_togglePopups__WEBPACK_IMPORTED_MODULE_1__.default)();\n\n//# sourceURL=webpack://js-diplom/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_selectClub__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/selectClub */ \"./src/modules/selectClub.js\");\n/* harmony import */ var _modules_togglePopups__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/togglePopups */ \"./src/modules/togglePopups.js\");\n/* harmony import */ var _modules_toggleGift__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/toggleGift */ \"./src/modules/toggleGift.js\");\n/* harmony import */ var _modules_mainSlider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mainSlider */ \"./src/modules/mainSlider.js\");\n\n\n\n\n\n // Select club\n\n(0,_modules_selectClub__WEBPACK_IMPORTED_MODULE_0__.default)(); // Toggle popups\n\n(0,_modules_togglePopups__WEBPACK_IMPORTED_MODULE_1__.default)(); // Toggle gift\n// toggleGift();\n// Main slider\n// mainSlider();\n\n//# sourceURL=webpack://js-diplom/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/mainSlider.js":
+/*!***********************************!*\
+  !*** ./src/modules/mainSlider.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar mainSlider = function mainSlider() {\n  var slide = document.querySelectorAll('.main-slider .slide'),\n      slider = document.querySelector('.main-slider');\n\n  var prevSlide = function prevSlide(elem, index) {\n    elem[index].style.display = 'none';\n  };\n\n  var nextSlide = function nextSlide(elem, index) {\n    elem[index].removeAttribute('style');\n  };\n\n  var currentSlide = 0,\n      interval;\n\n  var autoPlaySlide = function autoPlaySlide() {\n    prevSlide(slide, currentSlide);\n    currentSlide++;\n\n    if (currentSlide >= slide.length) {\n      currentSlide = 0;\n    }\n\n    nextSlide(slide, currentSlide);\n  };\n\n  var startSlide = function startSlide() {\n    var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 3000;\n    interval = setInterval(autoPlaySlide, time);\n  };\n\n  var stopSlide = function stopSlide() {\n    clearInterval(interval);\n  };\n\n  slider.addEventListener('click', function () {\n    autoPlaySlide();\n  });\n  slider.addEventListener('mouseover', function (event) {\n    if (event.target.closest('.main-slider')) {\n      stopSlide();\n    }\n  });\n  slider.addEventListener('mouseout', function (event) {\n    if (event.target.closest('.main-slider')) {\n      startSlide();\n    }\n  });\n  startSlide(3000);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mainSlider);\n\n//# sourceURL=webpack://js-diplom/./src/modules/mainSlider.js?");
 
 /***/ }),
 
@@ -53,6 +64,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/modules/toggleGift.js":
+/*!***********************************!*\
+  !*** ./src/modules/toggleGift.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar toggleGift = function toggleGift() {\n  var gift = document.querySelector('.fixed-gift');\n  gift.addEventListener('click', function () {\n    var popup = document.getElementById('gift');\n    popup.style.display = 'block';\n    gift.style.display = 'none';\n    popup.addEventListener('click', function (event) {\n      var target = event.target;\n\n      if (target.matches('.close_icon, .close-btn') || !target.closest('.form-wrapper')) {\n        popup.removeAttribute('style');\n      }\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (toggleGift);\n\n//# sourceURL=webpack://js-diplom/./src/modules/toggleGift.js?");
+
+/***/ }),
+
 /***/ "./src/modules/togglePopups.js":
 /*!*************************************!*\
   !*** ./src/modules/togglePopups.js ***!
@@ -60,7 +82,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar togglePopups = function togglePopups() {\n  document.body.addEventListener('click', function (event) {\n    var idPopup = event.target.dataset.popup;\n\n    if (!idPopup) {\n      return;\n    }\n\n    event.preventDefault();\n    var popup = document.querySelector(idPopup);\n    popup.style.display = 'block';\n    popup.addEventListener('click', function (event) {\n      var target = event.target;\n\n      if (target.classList.contains('close_icon') || !target.closest('.form-wrapper')) {\n        popup.removeAttribute('style');\n      }\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopups);\n\n//# sourceURL=webpack://js-diplom/./src/modules/togglePopups.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar togglePopups = function togglePopups() {\n  document.body.addEventListener('click', function (event) {\n    var target = event.target;\n    var idPopup;\n\n    if (target.closest('.fixed-gift')) {\n      idPopup = '#gift';\n    } else {\n      idPopup = target.dataset.popup;\n\n      if (!idPopup) {\n        return;\n      }\n\n      event.preventDefault();\n    }\n\n    var popup = document.querySelector(idPopup);\n    popup.style.display = 'block';\n    popup.addEventListener('click', function (event) {\n      var target = event.target;\n\n      if (target.matches('.close_icon, .close-btn') || !target.closest('.form-wrapper')) {\n        popup.removeAttribute('style');\n      }\n    });\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (togglePopups);\n\n//# sourceURL=webpack://js-diplom/./src/modules/togglePopups.js?");
 
 /***/ }),
 
@@ -462,7 +484,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("58b2e7a4a7befe0f0882")
+/******/ 		__webpack_require__.h = () => ("2f1a11a947ce8fcb230e")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
