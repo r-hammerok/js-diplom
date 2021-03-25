@@ -4,7 +4,7 @@ import selectClub from './modules/selectClub';
 import togglePopups from './modules/togglePopups';
 import toggleGift from './modules/toggleGift';
 import mainSlider  from './modules/mainSlider';
-import GallerySlider from './modules/gallerySlider';
+import UniSlider from './modules/uniSlider';
 
 
 // Select club
@@ -26,5 +26,5 @@ const options = {
     slideToShow: 1,
     infinity: true
 };
-const gallerySlider = new GallerySlider(options);
+const gallerySlider = new UniSlider(options);
 gallerySlider.init();
