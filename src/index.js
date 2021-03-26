@@ -6,6 +6,7 @@ import toggleGift from './modules/toggleGift';
 import mainSlider  from './modules/mainSlider';
 import UniSlider from './modules/uniSlider';
 import calcCards from './modules/calcCards';
+import sendForm from './modules/sendForm';
 
 
 // Select club
@@ -42,5 +43,8 @@ const serviceOptions = {
 const serviceSlider = new UniSlider(serviceOptions);
 serviceSlider.init();
 
-//Calculate Cards
+// Calculate Cards
 calcCards('ТЕЛО2020');
+
+// Send form
+sendForm();
