@@ -43,6 +43,4 @@ const serviceSlider = new UniSlider(serviceOptions);
 serviceSlider.init();
 
 //Calculate Cards
-calcCards();
-
-
+calcCards('ТЕЛО2020');

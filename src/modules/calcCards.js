@@ -1,15 +1,15 @@
-const calcCards = () => {
+const calcCards = (promoCode = '') => {
     const calcForm = document.getElementById('card_order'),
         totalValue = document.getElementById('price-total');
 
     const price = {
-        'schelkovo': {
+        'mozaika': {
             '1': 1999,
             '6': 9900,
             '9': 13900,
             '12': 19900
         },
-        'mozaika': {
+        'schelkovo': {
             '1': 2999,
             '6': 14990,
             '9': 21990,
@@ -28,20 +28,28 @@ const calcCards = () => {
         return returnValue;
     };
 
+    const takeDiscount = (sum) => {
+        const promo = calcForm.querySelector('.price input').value.trim();
+        if (promo === promoCode) {
+            return Math.trunc(sum * 0.7);
+        } else {
+            return sum;
+        }
+    };
+
     const countSum = () => {
         let total = 0;
         const clubName = getCheckedElement('club');
         const timeCard = getCheckedElement('time');
-        total = price[clubName][timeCard];
+        total = takeDiscount(price[clubName][timeCard]);
         totalValue.textContent = total;
     };
 
-    calcForm.addEventListener('input', (event) => {
+    calcForm.addEventListener('input', () => {
         countSum();
     });
 
     countSum();
-
 };
 
 export default calcCards;
