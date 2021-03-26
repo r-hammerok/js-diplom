@@ -20,11 +20,24 @@ togglePopups();
 mainSlider();
 
 // Gallery slider
-const options = {
+const galleryOptions = {
     main: '#gallery .wrapper',
     wrap: '#gallery .gallery-slider',
+    dotsClassName: 'slider-dots',
     slideToShow: 1,
     infinity: true
 };
-const gallerySlider = new UniSlider(options);
+const gallerySlider = new UniSlider(galleryOptions);
 gallerySlider.init();
+
+// Service slider
+
+const serviceOptions = {
+    main: '#services .services-slider__wrap',
+    wrap: '#services .services-slider',
+    slideToShow: 5,
+    prefixClassName: 'srv-',
+    infinity: true
+};
+const serviceSlider = new UniSlider(serviceOptions);
+serviceSlider.init();

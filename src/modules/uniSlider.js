@@ -1,10 +1,13 @@
 class UniSlider {
-    constructor({main, wrap, prev, next, dots, slideToShow = 1, position = 0, infinity = false}) {
+    constructor({main, wrap, prev, next, dotsClassName, prefixClassName = 'uni-', slideToShow = 1, position = 0, infinity = false}) {
         this.main = document.querySelector(main);
         this.wrap = document.querySelector(wrap);
         this.next = document.querySelector(next);
         this.prev = document.querySelector(prev);
-        this.dots = document.querySelector(dots);
+        this.dotsClassName = dotsClassName;
+        this.prefixClassName = prefixClassName;
+        this.dots = null;
+        // this.dots = document.querySelector(dots);
         this.slides = this.wrap.children;
         this.slidesToShow = slideToShow;
         this.options = {
@@ -16,12 +19,13 @@ class UniSlider {
     }
 
     init() {
+        console.log(this, this.options.widthSlide, this.options.maxPosition);
         this.addClass();
         this.addStyle();
         if (!this.next || !this.prev) {
             this.addArrow();
         }
-        if (!this.dots) {
+        if (this.dotsClassName) {
             this.addDots();
             this.markActiveDot();
         }
@@ -29,18 +33,18 @@ class UniSlider {
     }
 
     addClass() {
-        this.main.classList.add('uni-slider');
-        this.wrap.classList.add('uni-slider__wrap');
+        this.main.classList.add(this.prefixClassName + 'slider');
+        this.wrap.classList.add(this.prefixClassName + 'slider__wrap');
         for (const item of this.slides) {
-            item.classList.add('uni-slider__item');
+            item.classList.add(this.prefixClassName + 'slider__item');
         }
     }
 
     addStyle() {
         const style = document.createElement('style');
-        style.id = 'uni-slider-style';
+        style.id = this.prefixClassName + 'id-slider-style';
         style.textContent = `
-            .uni-slider__item {
+            .${this.prefixClassName}slider__item {
                 flex: 0 0 ${this.options.widthSlide}%;
             }
         `;
@@ -55,7 +59,9 @@ class UniSlider {
 
     renderSlider() {
         this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
-        this.markActiveDot();
+        if (this.dots) {
+            this.markActiveDot();
+        }
     }
 
     prevSlider() {
@@ -87,8 +93,8 @@ class UniSlider {
         this.prev = document.createElement('div');
         this.next = document.createElement('div');
 
-        this.prev.className = 'fa fa-chevron-left uni-slider__prev';
-        this.next.className = 'fa fa-chevron-right uni-slider__next';
+        this.prev.className = `fa fa-chevron-left ${this.prefixClassName}slider__prev`;
+        this.next.className = `fa fa-chevron-right ${this.prefixClassName}slider__next`;
 
         this.main.insertAdjacentElement('beforeend', this.prev);
         this.main.insertAdjacentElement('beforeend', this.next);
@@ -96,11 +102,11 @@ class UniSlider {
 
     addDots() {
         this.dots = document.createElement('div');
-        this.dots.className = 'uni-slider-dots';
+        this.dots.className = this.prefixClassName + this.dotsClassName;
 
         for (let i = 0; i < this.slides.length; i++) {
             const dot = document.createElement('div');
-            dot.className = 'uni-slider-dots__item';
+            dot.className = this.prefixClassName + this.dotsClassName + '__item';
             dot.dataset.sliderIndex = i;
             this.dots.insertAdjacentElement('beforeend', dot);
         }
@@ -121,7 +127,7 @@ class UniSlider {
 
     markActiveDot() {
         const dots = this.dots.querySelectorAll('div');
-        const activeDotClassName = 'uni-slider-dots__item_active';
+        const activeDotClassName = this.prefixClassName + this.dotsClassName + '__item_active';
         dots.forEach((item, index) => {
             if (index === this.options.position) {
                 item.classList.add(activeDotClassName);
