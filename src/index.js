@@ -5,6 +5,7 @@ import togglePopups from './modules/togglePopups';
 import toggleGift from './modules/toggleGift';
 import mainSlider  from './modules/mainSlider';
 import UniSlider from './modules/uniSlider';
+import calcCards from './modules/calcCards';
 
 
 // Select club
@@ -31,7 +32,6 @@ const gallerySlider = new UniSlider(galleryOptions);
 gallerySlider.init();
 
 // Service slider
-
 const serviceOptions = {
     main: '#services .services-slider__wrap',
     wrap: '#services .services-slider',
@@ -41,3 +41,8 @@ const serviceOptions = {
 };
 const serviceSlider = new UniSlider(serviceOptions);
 serviceSlider.init();
+
+//Calculate Cards
+calcCards();
+
+

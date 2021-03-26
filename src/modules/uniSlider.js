@@ -7,7 +7,6 @@ class UniSlider {
         this.dotsClassName = dotsClassName;
         this.prefixClassName = prefixClassName;
         this.dots = null;
-        // this.dots = document.querySelector(dots);
         this.slides = this.wrap.children;
         this.slidesToShow = slideToShow;
         this.options = {
@@ -19,7 +18,6 @@ class UniSlider {
     }
 
     init() {
-        console.log(this, this.options.widthSlide, this.options.maxPosition);
         this.addClass();
         this.addStyle();
         if (!this.next || !this.prev) {
