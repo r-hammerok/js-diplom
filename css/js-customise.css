@@ -1,3 +1,23 @@
+.popup .form-wrapper {
+    height: unset;
+}
+.popup .form-content {
+    height: unset;
+    padding-bottom: 3em;
+}
+
+.popup .form-content .error-message {
+    font-size: 1.2em;
+    color: red;
+    text-shadow: 1px 1px 0.05em black;
+    padding: 1em .7em;
+}
+
+.popup .form-content input[type='text'].error-input,
+.popup .form-content input[type='tel'].error-input {
+    border: 3px solid red;
+}
+
 #gallery .uni-slider {
     overflow: hidden;
     position: relative;

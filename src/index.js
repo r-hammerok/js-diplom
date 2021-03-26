@@ -47,4 +47,6 @@ serviceSlider.init();
 calcCards('ТЕЛО2019');
 
 // Send form
-sendForm();
+sendForm({
+    errorPrefix: 'error-'
+});

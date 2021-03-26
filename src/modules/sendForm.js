@@ -1,4 +1,4 @@
-const sendForm = () => {
+const sendForm = ({errorPrefix}) => {
 
     const errorMessage = 'Что-то пошло не так...',
         loadMessage = 'Загрузка...',
@@ -6,7 +6,9 @@ const sendForm = () => {
 
     const validaionInputs = (form) => {
         let errors = [];
+        const classErrorInput = `${errorPrefix}input`;
         form.querySelectorAll('input').forEach ((item) => {
+            let errorsLen = errors.length;
             if (item.name === 'name') {
                 if (item.value.length === 0) {
                     errors.push('Имя не должно быть пустым!');
@@ -20,21 +22,26 @@ const sendForm = () => {
                 }
             }
             if (item.type === 'checkbox' && item.closest('p.personal-data')) {
+                console.log(item);
                 if (!item.checked) {
                     errors.push('Не дано согласие на обработку персональных данных!');
                 }
+            }
+            if (errorsLen !== errors.length) {
+                item.classList.add(classErrorInput);
+            } else if (item.classList.contains(classErrorInput)) {
+                item.classList.remove(classErrorInput);
             }
         });
         return errors;
     };
 
-    const cssType1 = 'font-size: 2rem;',
-        cssType2 = 'font-size: 1.5rem; color: white;',
-        cssError = 'font-size: 1.5rem; color: red; text-shadow: 1px 1px 0.05em black;';
+    // const cssType1 = 'font-size: 2em;',
+    //     cssType2 = 'font-size: 1.5em; color: white;',
+    //     cssError = 'font-size: 1.5em; color: red; text-shadow: 1px 1px 0.05em black;';
 
-    const statusMessage = document.createElement('div');
-
-
+    const statusMessage = document.createElement('p');
+    
     document.body.addEventListener('submit', (event) => {
         event.preventDefault();
 
@@ -49,9 +56,13 @@ const sendForm = () => {
         console.log(errors);
 
         if (errors.length) {
-            statusMessage.style.cssText = cssError;
+            if (errorPrefix) {
+                statusMessage.className = `${errorPrefix}message`;    
+            }
             statusMessage.innerHTML = errors.join('<br />');
             return;
+        } else {
+            statusMessage.innerText = '';
         }
     });
 };
