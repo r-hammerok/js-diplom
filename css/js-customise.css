@@ -132,3 +132,10 @@
 #gallery .uni-slider-dots__item_active {
     background-color: #ffd11a;
 }
+
+header nav.top-window {
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    opacity: 0.75; 
+}

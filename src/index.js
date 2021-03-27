@@ -2,12 +2,12 @@
 
 import selectClub from './modules/selectClub';
 import togglePopups from './modules/togglePopups';
-import toggleGift from './modules/toggleGift';
 import mainSlider  from './modules/mainSlider';
 import UniSlider from './modules/uniSlider';
 import calcCards from './modules/calcCards';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
+import toggleMenu from './modules/toggleMenu';
 
 
 // Select club
@@ -15,9 +15,6 @@ selectClub();
 
 // Toggle popups
 togglePopups();
-
-// Toggle gift
-// toggleGift();
 
 // Main slider
 mainSlider();
@@ -52,3 +49,6 @@ maskPhone('input[type="tel"]');
 
 // Send form
 sendForm();
+
+// Togle menu
+toggleMenu();
