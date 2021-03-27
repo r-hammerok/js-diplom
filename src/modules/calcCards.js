@@ -1,6 +1,10 @@
 const calcCards = (promoCode = '') => {
     const calcForm = document.getElementById('card_order'),
         totalValue = document.getElementById('price-total');
+    
+    if (!calcForm || !totalValue) {
+        return;
+    }
 
     const price = {
         'mozaika': {

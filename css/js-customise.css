@@ -17,9 +17,14 @@
 .popup .form-content .process-send__success {
     font-size: 1.4em;
     height: 24vh;
+    padding: 0 1em;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#thanks .form-content p.process-send__success {
+    height: unset;
 }
 
 #banner-form .process-send__error {
@@ -29,11 +34,18 @@
     padding: .5em;
 }
 
-#banner-form .process-send__success {
+#banner-form .process-send__success,
+#card_order .process-send__success {
     margin-top: 1.3em;
 }
 
-#card_order .process-send-block {
+#card_order .process-send__error {
+    font-size: 1em;
+    color: red;
+    padding: .5em;
+}
+
+#footer_form .process-send__error {
     font-size: 1em;
     color: red;
     padding: .5em;

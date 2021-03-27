@@ -1,12 +1,14 @@
 const sendForm = (prefixAdditionalClass = 'process-send') => {
 
-    const errorMessage = '<span style="color: #ff1f1f;">Что-то пошло не так...</span>',
+    const errorMessage = '<span style="color: #ff1f1f;">Увы!<br />Что-то пошло не так...<br />Мы уже работаем над этой проблемой!</span>',
         loadMessage = '<span style="color: #cab5b5;">Загрузка...</span>',
-        successMessage = '<span style="color: #21d639;">Спасибо! Мы скоро с вами свяжемся!</span>';
+        successMessage = '<span style="color: #21d639;">Ваша заявка отправлена.<br />Мы свяжемся с вами в ближайшее время.</span>';
 
     const validaionInputs = (form) => {
         let errors = [];
         const classErrorInput = `${prefixAdditionalClass}-input__error`;
+        let countRadio = 0,
+            countChecked = 0;
         form.querySelectorAll('input').forEach ((item) => {
             let errorsLen = errors.length;
             if (item.name === 'name') {
@@ -26,12 +28,22 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
                     errors.push('Не дано согласие на обработку персональных данных!');
                 }
             }
+            if (item.type === 'radio') {
+                countRadio++;
+                if (item.checked) {
+                    countChecked++;
+                }
+            }
             if (errorsLen !== errors.length) {
                 item.classList.add(classErrorInput);
             } else if (item.classList.contains(classErrorInput)) {
                 item.classList.remove(classErrorInput);
             }
         });
+        if (countRadio > 0 && countChecked === 0) {
+            errors.push('Выберите хотя бы один элемент!');
+        }
+        
         return errors;
     };
 
@@ -46,49 +58,58 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
 
     };
     
-    const statusMessage = document.createElement('p');
+    let statusMessage = document.createElement('p');
     
     document.body.addEventListener('submit', (event) => {
         event.preventDefault();
 
         const form = event.target;
-
         if (!form) {
             return;
         }
 
-        let targetResultSendMessage = form;
-        if (form.id === 'banner-form') {
-            targetResultSendMessage = document.querySelector('#thanks .form-content');
-        }
-
-        form.insertAdjacentElement('beforeend', statusMessage);
-
         const errors = validaionInputs(form);
-
         if (errors.length) {
             if (prefixAdditionalClass) {
                 statusMessage.className = `${prefixAdditionalClass}__error`;    
             }
             statusMessage.innerHTML = errors.join('<br />');
+            form.insertAdjacentElement('beforeend', statusMessage);
             return;
         }
-
         statusMessage.remove();
-        targetResultSendMessage.insertAdjacentElement('beforeend', statusMessage);
-        statusMessage.className = `${prefixAdditionalClass}__success`;
-        
-        if (form.closest('.popup')) {
-            form.textContent = '';
-            form.insertAdjacentElement('beforeend', statusMessage);
-        }
-        
-        statusMessage.innerHTML = loadMessage;
 
         const formData = new FormData(form);
         let body = {};
         formData.forEach((val, key) => {
             body[key] = val;
+        });
+
+        let targetResultSendMessage = form;
+        let popup = form.closest('.popup');
+        if (popup && (popup.id === 'callback_form' || popup.id === 'free_visit_form')) {
+            targetResultSendMessage.textContent = '';
+            targetResultSendMessage.insertAdjacentElement('beforeend', statusMessage);
+        } else if (form.id === 'banner-form' || form.id === 'footer_form') {
+            popup = document.getElementById('thanks');
+            targetResultSendMessage = popup.querySelector('.form-content');
+            statusMessage = targetResultSendMessage.querySelector('p');
+            statusMessage.textContent = '';
+            popup.style.display = 'block';
+        } else {
+            targetResultSendMessage.insertAdjacentElement('beforeend', statusMessage);
+        }
+        statusMessage.className = `${prefixAdditionalClass}__success`;
+        statusMessage.innerHTML = loadMessage;
+
+        
+        let isChecked = false;
+        form.querySelectorAll('input').forEach((item) => {
+            item.value = '';
+            if (item.type === 'radio' && !isChecked) {
+                item.checked = true;
+                isChecked = true;
+            }
         });
         
         postData(body)
@@ -96,40 +117,7 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
                     if (response.status !== 200) {
                         throw new Error('Status network not 200!');
                     }
-
-                    form.querySelectorAll('input').forEach((item) => {
-                        item.checked = false;
-                        item.value = '';
-                    });
-
-                    if (form.id === 'banner-form') {
-                        
-                    }
-            
-
                     statusMessage.innerHTML = successMessage;
-
-                    console.log(targetResultSendMessage.closest('#thanks'));
-                    if (targetResultSendMessage.closest('#thanks')) {
-                        targetResultSendMessage.closest('#thanks').style.display = 'block';
-                    } else {
-                        statusMessage.innerHTML = successMessage;
-                    }    
-                    
-
-                    
-
-                    
-                    // setTimeout(() => {
-                    //     statusMessage.remove();
-                    // }, 3000);
-                    // if (targetId === 'form3') {
-                    //     const eventClick = new Event("click");
-                    //     const popup = document.querySelector('.popup');
-                    //     setTimeout(() => {
-                    //         popup.dispatchEvent(eventClick);
-                    //     }, 1000);
-                    // }
                 })
             .catch((error) => {
                 statusMessage.innerHTML = errorMessage;

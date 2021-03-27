@@ -23,14 +23,6 @@ const togglePopups = () => {
 
         const popup = document.querySelector(idPopup);
         popup.style.display = 'block';
-
-        // popup.addEventListener('click', (event) => {
-        //     const target = event.target;
-        //     if (target.matches('.close_icon, .close-btn') || 
-        //             !target.closest('.form-wrapper')) {
-        //         popup.removeAttribute('style');
-        //     }
-        // });
     });
 
 
