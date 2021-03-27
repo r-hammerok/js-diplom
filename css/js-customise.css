@@ -6,15 +6,44 @@
     padding-bottom: 3em;
 }
 
-.popup .form-content .error-message {
+.popup .form-content .process-send__error {
     font-size: 1.2em;
     color: red;
     text-shadow: 1px 1px 0.05em black;
     padding: 1em .7em;
 }
 
-.popup .form-content input[type='text'].error-input,
-.popup .form-content input[type='tel'].error-input {
+.popup .form-content .process-send__success {
+    font-size: 1.4em;
+    height: 24vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#banner-form .process-send__error {
+    font-size: 0.9em;
+    color: red;
+    text-shadow: 1px 1px 0.05em #461a1a;
+    padding: .5em;
+}
+
+#banner-form .process-send__success {
+    margin-top: 1.3em;
+}
+
+#card_order .process-send-block {
+    font-size: 1em;
+    color: red;
+    padding: .5em;
+}
+
+.popup .form-content input[type='text'].process-send-input__error,
+.popup .form-content input[type='tel'].process-send-input__error,
+#banner-form input[type='text'].process-send-input__error,
+#banner-form input[type='tel'].process-send-input__error,
+#card_order input[type='text'].process-send-input__error,
+#card_order input[type='tel'].process-send-input__error {
     border: 3px solid red;
 }
 

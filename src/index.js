@@ -7,6 +7,7 @@ import mainSlider  from './modules/mainSlider';
 import UniSlider from './modules/uniSlider';
 import calcCards from './modules/calcCards';
 import sendForm from './modules/sendForm';
+import maskPhone from './modules/maskPhone';
 
 
 // Select club
@@ -46,7 +47,8 @@ serviceSlider.init();
 // Calculate Cards
 calcCards('ТЕЛО2019');
 
+// Mask phone
+maskPhone('input[type="tel"]');
+
 // Send form
-sendForm({
-    errorPrefix: 'error-'
-});
+sendForm();

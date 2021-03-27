@@ -12,6 +12,8 @@ module.exports = {
         port: 8080,
         hot: true,
         writeToDisk: true,
+        compress: true,
+        disableHostCheck: true
     },
     module: {
         rules: [

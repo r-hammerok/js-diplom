@@ -29,7 +29,7 @@ const calcCards = (promoCode = '') => {
     };
 
     const takeDiscount = (sum) => {
-        const promo = calcForm.querySelector('.price input').value.trim();
+        const promo = calcForm.querySelector('.price input[name="promo"]').value.trim();
         if (promo === promoCode) {
             return Math.trunc(sum * 0.7);
         } else {

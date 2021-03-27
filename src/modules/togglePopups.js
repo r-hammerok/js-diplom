@@ -1,4 +1,4 @@
-const togglePopups = (errorPrefix = 'error-') => {
+const togglePopups = () => {
     document.body.addEventListener('click', (event) => {
 
         const target = event.target;
@@ -24,19 +24,6 @@ const togglePopups = (errorPrefix = 'error-') => {
             if (target.matches('.close_icon, .close-btn') || 
                     !target.closest('.form-wrapper')) {
                 popup.removeAttribute('style');
-                const errorBlock = popup.querySelector(`.${errorPrefix}message`);
-                if (errorBlock) {
-                    errorBlock.remove();
-                }
-                const errorInputs = popup.querySelectorAll(`.${errorPrefix}input`);
-                console.log(errorInputs);
-                errorInputs.forEach((item) => {
-                    item.classList.remove(`${errorPrefix}input`);
-                     if (!item.classList.length) {
-                        item.removeAttribute('class');
-                     }
-                });
-
             }
         });
     });
