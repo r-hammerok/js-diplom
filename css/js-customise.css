@@ -1,7 +1,8 @@
 .popup .form-wrapper {
     height: unset;
 }
-.popup .form-content {
+#callback_form .form-content,
+#free_visit_form .form-content {
     height: unset;
     padding-bottom: 3em;
 }

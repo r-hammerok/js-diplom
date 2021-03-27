@@ -3,6 +3,11 @@ const togglePopups = () => {
 
         const target = event.target;
 
+        if (target.matches('.close_icon, .close-btn') || 
+                    !target.closest('.form-wrapper') && target.closest('.popup')) {
+            target.closest('.popup').removeAttribute('style');
+        }
+
         let idPopup;
 
         if (target.closest('.fixed-gift')) {
@@ -19,14 +24,16 @@ const togglePopups = () => {
         const popup = document.querySelector(idPopup);
         popup.style.display = 'block';
 
-        popup.addEventListener('click', (event) => {
-            const target = event.target;
-            if (target.matches('.close_icon, .close-btn') || 
-                    !target.closest('.form-wrapper')) {
-                popup.removeAttribute('style');
-            }
-        });
+        // popup.addEventListener('click', (event) => {
+        //     const target = event.target;
+        //     if (target.matches('.close_icon, .close-btn') || 
+        //             !target.closest('.form-wrapper')) {
+        //         popup.removeAttribute('style');
+        //     }
+        // });
     });
+
+
 };
 
 export default togglePopups;

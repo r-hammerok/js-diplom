@@ -51,11 +51,15 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
     document.body.addEventListener('submit', (event) => {
         event.preventDefault();
 
-        
         const form = event.target;
 
         if (!form) {
             return;
+        }
+
+        let targetResultSendMessage = form;
+        if (form.id === 'banner-form') {
+            targetResultSendMessage = document.querySelector('#thanks .form-content');
         }
 
         form.insertAdjacentElement('beforeend', statusMessage);
@@ -69,6 +73,9 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
             statusMessage.innerHTML = errors.join('<br />');
             return;
         }
+
+        statusMessage.remove();
+        targetResultSendMessage.insertAdjacentElement('beforeend', statusMessage);
         statusMessage.className = `${prefixAdditionalClass}__success`;
         
         if (form.closest('.popup')) {
@@ -90,12 +97,29 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
                         throw new Error('Status network not 200!');
                     }
 
-                    statusMessage.innerHTML = successMessage;
-
                     form.querySelectorAll('input').forEach((item) => {
                         item.checked = false;
                         item.value = '';
                     });
+
+                    if (form.id === 'banner-form') {
+                        
+                    }
+            
+
+                    statusMessage.innerHTML = successMessage;
+
+                    console.log(targetResultSendMessage.closest('#thanks'));
+                    if (targetResultSendMessage.closest('#thanks')) {
+                        targetResultSendMessage.closest('#thanks').style.display = 'block';
+                    } else {
+                        statusMessage.innerHTML = successMessage;
+                    }    
+                    
+
+                    
+
+                    
                     // setTimeout(() => {
                     //     statusMessage.remove();
                     // }, 3000);
