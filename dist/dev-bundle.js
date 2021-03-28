@@ -115,7 +115,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar smoothScrolling = function smoothScrolling() {};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (smoothScrolling);\n\n//# sourceURL=webpack://js-diplom/./src/modules/smoothScrolling.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar smoothScrolling = function smoothScrolling() {\n  var scrollTo = function scrollTo() {\n    var blockId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';\n    var behavior = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'smooth';\n    var block = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'start';\n    document.querySelector(blockId).scrollIntoView({\n      behavior: behavior,\n      block: block\n    });\n  };\n\n  document.querySelector('body').addEventListener('click', function (event) {\n    var target = event.target;\n    var targetScroll;\n\n    if (target.closest('li.scroll')) {\n      var a = target.closest('li.scroll').querySelector('a');\n      var href = a.getAttribute('href');\n\n      if (href && href[0] === '#') {\n        targetScroll = href;\n      }\n    }\n\n    if (target.closest('a#totop')) {\n      targetScroll = 'body';\n    }\n\n    if (targetScroll) {\n      event.preventDefault();\n      scrollTo(targetScroll);\n    }\n  });\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (smoothScrolling);\n\n//# sourceURL=webpack://js-diplom/./src/modules/smoothScrolling.js?");
 
 /***/ }),
 
@@ -561,7 +561,7 @@ eval("var map = {\n\t\"./log\": \"./node_modules/webpack/hot/log.js\"\n};\n\n\nf
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("d1aa428692d3b2cb8c12")
+/******/ 		__webpack_require__.h = () => ("a39653f42b84ee0a2cac")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
