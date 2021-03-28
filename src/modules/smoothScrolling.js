@@ -19,7 +19,7 @@ const smoothScrolling = () => {
             const a = target.closest('li.scroll').querySelector('a');
             const href = a.getAttribute('href');
             if (href && href[0] === '#') {
-                targetScroll = href;
+                targetScroll = href.length === 1 ? 'body' : href;
             }
         }
         if (target.closest('a#totop')) {

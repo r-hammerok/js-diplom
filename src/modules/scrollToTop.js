@@ -3,7 +3,6 @@ const scrollToTop = () => {
     const firstSection = document.querySelector('section');
 
     if (!toTop || !firstSection) {
-        console.log('fail scroll');
         return;
     }
     

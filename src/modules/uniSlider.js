@@ -7,17 +7,21 @@ class UniSlider {
         this.dotsClassName = dotsClassName;
         this.prefixClassName = prefixClassName;
         this.dots = null;
-        this.slides = this.wrap.children;
         this.slidesToShow = slideToShow;
         this.options = {
             position,
             infinity,
             widthSlide: Math.floor((100 / this.slidesToShow) * 10000) / 10000,
-            maxPosition: this.slides.length - this.slidesToShow
         };
     }
 
     init() {
+        if (!this.wrap) {
+            return;
+        }
+        this.slides = this.wrap.children;
+        this.options.maxPosition = this.slides.length - this.slidesToShow;
+        
         this.addClass();
         this.addStyle();
         if (!this.next || !this.prev) {

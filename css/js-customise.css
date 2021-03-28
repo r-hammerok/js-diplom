@@ -82,7 +82,8 @@
 
 #gallery .uni-slider__wrap,
 #services .srv-slider__wrap,
-#mozaika #adv-slider.adv-slider__wrap {
+#mozaika #adv-slider.adv-slider__wrap,
+#schelkovo #adv-slider.adv-slider__wrap {
     display: flex;
     transition: transform 0.5s;
     will-chahge: transform;
@@ -93,11 +94,13 @@
     margin: 0;
  }
 
- html#mozaika #adv-slider .adv-slider__item:first-child {
+ html#mozaika #adv-slider .adv-slider__item:first-child,
+ html#schelkovo #adv-slider .adv-slider__item:first-child {
      margin-left: 0;
  }
 
- html#mozaika #adv-slider .adv-slider__item {
+ html#mozaika #adv-slider .adv-slider__item,
+ html#schelkovo #adv-slider .adv-slider__item {
      margin-left: 0;
      margin-right: 0;
  }
