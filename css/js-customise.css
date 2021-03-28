@@ -139,3 +139,16 @@ header nav.top-window {
     z-index: 9999;
     opacity: 0.75; 
 }
+
+nav.popup-menu {
+    display: flex;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+
+nav.popup-menu.active {
+    -webkit-transition: 1s;
+    transition: 1s;
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+}
