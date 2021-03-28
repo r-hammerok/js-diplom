@@ -14,8 +14,6 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
             if (item.name === 'name') {
                 if (item.value.length === 0) {
                     errors.push('Имя не должно быть пустым!');
-                } else if (!/[/\sа-яё\-]/gi.test(item.value.trim())) {
-                    errors.push('Имя должно содержать только русские буквы, пробелы или тире!');
                 }
             }
             if (item.name === 'phone') {
@@ -58,7 +56,8 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
 
     };
     
-    let statusMessage = document.createElement('p');
+    let validationResult = document.createElement('p'),
+        statusMessage = document.createElement('p');
     
     document.body.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -71,13 +70,13 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
         const errors = validaionInputs(form);
         if (errors.length) {
             if (prefixAdditionalClass) {
-                statusMessage.className = `${prefixAdditionalClass}__error`;    
+                validationResult.className = `${prefixAdditionalClass}__error`;    
             }
-            statusMessage.innerHTML = errors.join('<br />');
-            form.insertAdjacentElement('beforeend', statusMessage);
+            validationResult.innerHTML = errors.join('<br />');
+            form.insertAdjacentElement('beforeend', validationResult);
             return;
         }
-        statusMessage.remove();
+        validationResult.remove();
 
         const formData = new FormData(form);
         let body = {};
@@ -94,7 +93,9 @@ const sendForm = (prefixAdditionalClass = 'process-send') => {
             popup = document.getElementById('thanks');
             targetResultSendMessage = popup.querySelector('.form-content');
             statusMessage = targetResultSendMessage.querySelector('p');
-            statusMessage.textContent = '';
+            if (statusMessage) {
+                statusMessage.textContent = '';
+            }
             popup.style.display = 'block';
         } else {
             targetResultSendMessage.insertAdjacentElement('beforeend', statusMessage);

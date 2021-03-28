@@ -8,6 +8,7 @@ import calcCards from './modules/calcCards';
 import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
 import toggleMenu from './modules/toggleMenu';
+import validaionInput from './modules/validationInput';
 
 
 // Select club
@@ -52,3 +53,6 @@ sendForm();
 
 // Togle menu
 toggleMenu();
+
+// Valiadtion input
+validaionInput();
