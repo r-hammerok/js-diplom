@@ -1,5 +1,8 @@
 class UniSlider {
-    constructor({main, wrap, prev, next, dotsClassName, prefixClassName = 'uni-', slideToShow = 1, position = 0, infinity = false}) {
+    constructor({main, wrap, prev, next, dotsClassName, prefixClassName = 'uni-', slideToShow = 1,
+        responsive = [],
+        position = 0, infinity = false}) {
+
         this.main = document.querySelector(main);
         this.wrap = document.querySelector(wrap);
         this.next = document.querySelector(next);
@@ -11,8 +14,8 @@ class UniSlider {
         this.options = {
             position,
             infinity,
-            widthSlide: Math.floor((100 / this.slidesToShow) * 10000) / 10000,
         };
+        this.responsive = responsive;
     }
 
     init() {
@@ -21,6 +24,7 @@ class UniSlider {
         }
         this.slides = this.wrap.children;
         this.options.maxPosition = this.slides.length - this.slidesToShow;
+        this.setWidthSlide();
         
         this.addClass();
         this.addStyle();
@@ -32,6 +36,14 @@ class UniSlider {
             this.markActiveDot();
         }
         this.controlSlider();
+
+        if (this.responsive) {
+            this.responsiveInit();
+        }
+    }
+
+    setWidthSlide() {
+        this.options.widthSlide = Math.floor((100 / this.slidesToShow) * 10000) / 10000;
     }
 
     addClass() {
@@ -43,15 +55,18 @@ class UniSlider {
     }
 
     addStyle() {
-        const style = document.createElement('style');
-        style.id = this.prefixClassName + 'id-slider-style';
+        const styleId = this.prefixClassName + 'id-slider-style';
+        let style  = document.getElementById(styleId);
+        if (!style) {
+            style = document.createElement('style');
+            style.id = styleId;
+            document.head.insertAdjacentElement('beforeend', style);
+        }
         style.textContent = `
             .${this.prefixClassName}slider__item {
                 flex: 0 0 ${this.options.widthSlide}%;
             }
         `;
-
-        document.head.insertAdjacentElement('beforeend', style);
     }
 
     controlSlider() {
@@ -137,6 +152,31 @@ class UniSlider {
                 item.classList.remove(activeDotClassName);
             }
         });
+    }
+
+    responsiveInit() {
+        const slidesToShowDefault = this.slidesToShow;
+        const allResponsive = this.responsive.map(item => item.breakpoint);
+        const maxResponse = Math.max(...allResponsive);
+
+        const checkResponse = () => {
+            const widthWindow = document.documentElement.clientWidth;
+            if (widthWindow < maxResponse) {
+                for ( let i = 0; i < allResponsive.length; i++) {
+                    if (widthWindow < allResponsive[i]) {
+                        this.slidesToShow = this.responsive[i].slidesToShow;
+
+                    }
+                }
+            } else {
+                this.slidesToShow = slidesToShowDefault;
+            }
+            this.setWidthSlide();
+            this.addStyle();
+        };
+
+        checkResponse();
+        window.addEventListener('resize', checkResponse);
     }
 
 }

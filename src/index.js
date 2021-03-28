@@ -39,7 +39,26 @@ const serviceOptions = {
     wrap: '#services .services-slider',
     slideToShow: 5,
     prefixClassName: 'srv-',
-    infinity: true
+    infinity: true,
+
+    responsive: [
+        {
+            breakpoint: 1200,
+            slidesToShow: 4
+        },
+        {
+            breakpoint: 992,
+            slidesToShow: 3
+        },
+        {
+            breakpoint: 768,
+            slidesToShow: 2
+        },
+        {
+            breakpoint: 480,
+            slidesToShow: 1
+        }
+    ]
 };
 const serviceSlider = new UniSlider(serviceOptions);
 serviceSlider.init();
