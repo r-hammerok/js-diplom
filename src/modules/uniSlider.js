@@ -12,7 +12,7 @@ class UniSlider {
         this.options = {
             position,
             infinity,
-            widthSlide: Math.floor(100 / this.slidesToShow),
+            widthSlide: Math.floor((100 / this.slidesToShow) * 10000) / 10000,
             maxPosition: this.slides.length - this.slidesToShow
         };
     }

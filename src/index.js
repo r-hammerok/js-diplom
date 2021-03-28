@@ -44,6 +44,17 @@ const serviceOptions = {
 const serviceSlider = new UniSlider(serviceOptions);
 serviceSlider.init();
 
+// Advantages slider
+const advantagesOptions = {
+    main: '.advantages-slider .wrapper',
+    wrap: '.advantages-slider #adv-slider',
+    slideToShow: 3,
+    prefixClassName: 'adv-',
+    infinity: true
+};
+const advantagesSlider = new UniSlider(advantagesOptions);
+advantagesSlider.init();
+
 // Calculate Cards
 calcCards('ТЕЛО2019');
 

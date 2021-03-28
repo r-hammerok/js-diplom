@@ -1,9 +1,13 @@
 const smoothScrolling = () => {
     const scrollTo = (blockId = '', behavior = 'smooth', block = 'start') => {
-        document.querySelector(blockId).scrollIntoView({
-            behavior: behavior,
-            block: block
-        });
+        try {
+            document.querySelector(blockId).scrollIntoView ({
+                behavior: behavior,
+                block: block
+            });
+        } catch(e) {
+            console.log(e, e.name);
+        }
     };
 
     document.querySelector('body').addEventListener('click', (event) => {

@@ -1,6 +1,11 @@
 const scrollToTop = () => {
     const toTop = document.getElementById('totop');
-    const firstSection = document.getElementById('clubs');
+    const firstSection = document.querySelector('section');
+
+    if (!toTop || !firstSection) {
+        console.log('fail scroll');
+        return;
+    }
     
     const rect = firstSection.getBoundingClientRect();
     const point = rect.top + rect.height;

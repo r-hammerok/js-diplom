@@ -72,8 +72,17 @@
     max-width: none;
 }
 
+.advantages-slider .adv-slider {
+    overflow: hidden;
+    position: relative;
+    max-width: none;
+    padding: 0;
+    width: 95%;
+}
+
 #gallery .uni-slider__wrap,
-#services .srv-slider__wrap {
+#services .srv-slider__wrap,
+#mozaika #adv-slider.adv-slider__wrap {
     display: flex;
     transition: transform 0.5s;
     will-chahge: transform;
@@ -82,6 +91,15 @@
 
  #services .srv-slider__item {
     margin: 0;
+ }
+
+ html#mozaika #adv-slider .adv-slider__item:first-child {
+     margin-left: 0;
+ }
+
+ html#mozaika #adv-slider .adv-slider__item {
+     margin-left: 0;
+     margin-right: 0;
  }
  
  #gallery .uni-slider__prev,
