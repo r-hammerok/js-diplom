@@ -152,3 +152,20 @@ nav.popup-menu.active {
     -webkit-transform: translateX(0%);
     transform: translateX(0%);
 }
+
+#totop {
+    display: unset;
+    opacity: 0;
+}
+
+#totop.visible {
+    -webkit-transition: 1s;
+    transition: 1s;
+    opacity: 1;
+}
+
+#totop.unvisible {
+    -webkit-transition: 1s;
+    transition: 1s;
+    opacity: 0;
+}

@@ -9,6 +9,8 @@ import sendForm from './modules/sendForm';
 import maskPhone from './modules/maskPhone';
 import toggleMenu from './modules/toggleMenu';
 import validaionInput from './modules/validationInput';
+import scrollToTop from './modules/scrollToTop';
+import smoothScrolling from './modules/smoothScrolling';
 
 
 // Select club
@@ -56,3 +58,9 @@ toggleMenu();
 
 // Valiadtion input
 validaionInput();
+
+// Scroll to top
+scrollToTop();
+
+// Smooth scrolling
+smoothScrolling();
