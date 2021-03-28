@@ -45,16 +45,13 @@ const toggleMenu = () => {
         nav.style.display = 'none';
         
         popupMenu.classList.add('active');
-        // popupMenu.style.display = 'flex';
 
         popupMenu.addEventListener('click', (event) => {
             const target = event.target;
-            console.log(target);
 
             if ((target.tagName === 'IMG' && target.closest('.close-menu-btn')) ||
                       (target.tagName === 'A' && target.closest('.scroll')))
             {
-                // popupMenu.removeAttribute('style');
                 popupMenu.classList.remove('active');
             }
             
