@@ -15,6 +15,7 @@ const toggleMenu = () => {
         } else {
             mainMenu.removeAttribute('style');
             burgerBtn.removeAttribute('style');
+            nav.classList.remove('top-window');
         }
     };
 
